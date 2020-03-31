@@ -104,37 +104,41 @@ def create_data_var(filenames, mz_array,spectra,scans_count):
     out_filename_mat=''
     for i in range(len(outs)-1):
         out_filename_mat +=  outs[i] +  "/"
-        out_filename_mat += 'data.mat'
+    out_filename_mat += 'data.mat'
 
-        data={}
+    data={}
 
-        data['mz'] = mz_array
-        data['spectra'] = spectra
+    data['mz'] = mz_array
+    data['spectra'] = spectra
 
-        i=0
-        N=scans_count.sum()
-        arr=np.zeros(N)
-        for id,el in enumerate(scans_count):
-            arr[i:i+el]=id
-            i+=el
+    i=0
+    N=scans_count.sum()
+    arr=np.zeros(N)
+    for id,el in enumerate(scans_count):
+        arr[i:i+el]=id
+        i+=el
 
-        data['filenames']=np.empty((len(filenames),), dtype=np.object)
+    data['filenames']=np.empty((len(filenames),), dtype=np.object)
 
-        filenames_only=filenames
-        for i,filename in enumerate(filenames):
-            outs = filename.rsplit("/",maxsplit=1)
-            data['filenames'][i]=outs[1]
+    filenames_only=filenames
+    for i,filename in enumerate(filenames):
+        outs = filename.rsplit("/",maxsplit=1)
+        data['filenames'][i]=outs[1]
 
-        data['scan_of_file']=arr
+    data['scan_of_file']=arr
 
-        return out_filename_mat, data
+    return out_filename_mat, data
 
 if __name__ == '__main__':
     root = Tk()
     root.withdraw()
     filenames = askopenfilenames(parent=root, filetypes=[("mzXML files", ".mzXML")])
-    mz_array,spectra,scans_count=read_and_convert_data(filenames,mzmin=200,mzmax=1000, mz_bin=0.1)
+    mz_array,spectra,scans_count=read_and_convert_data(filenames,
+                                                       mzmin=200,
+                                                       mzmax=1000,
+                                                       mz_bin=0.1)
     out_filename_mat, data = create_data_var(filenames, mz_array,spectra,scans_count)
     io.savemat(out_filename_mat, {'data':data})
+    print(out_filename_mat)
     input("Press any key to exit... ")
     #sys.exit()
