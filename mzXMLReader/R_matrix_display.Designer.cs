@@ -85,7 +85,6 @@ namespace R_matrix_visualization
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btn_select_mzXML = new System.Windows.Forms.Button();
             this.btn_select_R = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -140,15 +139,6 @@ namespace R_matrix_visualization
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_select_mzXML
-            // 
-            this.btn_select_mzXML.Location = new System.Drawing.Point(12, 26);
-            this.btn_select_mzXML.Name = "btn_select_mzXML";
-            this.btn_select_mzXML.Size = new System.Drawing.Size(75, 24);
-            this.btn_select_mzXML.TabIndex = 0;
-            this.btn_select_mzXML.Text = "Select Files";
-            this.btn_select_mzXML.UseVisualStyleBackColor = true;
             // 
             // btn_select_R
             // 
@@ -327,7 +317,6 @@ namespace R_matrix_visualization
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btn_select_mzXML);
             this.panel3.Controls.Add(this.checkBoxScale);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(292, 0);
@@ -561,8 +550,6 @@ namespace R_matrix_visualization
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_select_mzXML;
         private System.Windows.Forms.Button btn_select_R;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel2;

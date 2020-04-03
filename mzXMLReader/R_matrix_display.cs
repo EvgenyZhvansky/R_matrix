@@ -756,7 +756,7 @@ namespace R_matrix_visualization
         public void save_image()
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png|EMF Image|*.emf";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
 
