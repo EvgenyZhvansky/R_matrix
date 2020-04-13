@@ -37,6 +37,7 @@ namespace R_matrix_visualization
         List<double> sampleCoordList = new List<double>();
         List<double> sampleCoordListSelected = new List<double>();
         List<string> sampleScanList = new List<string>();
+        List<string> sampleScanListSelected = new List<string>();
         double[,] rf = new double[1, 1];
         double[,] rf2 = new double[1, 1];
         static int X = 0, Y = 0;
@@ -137,9 +138,9 @@ namespace R_matrix_visualization
             plot1.YAxis.Title.Text = "intensity";
             plot2.YAxis.Title.Text = "intensity";
 
-            plot1.Title.Text = scanNamesList[Y] + " — " + sampleScanList[Y];
+            plot1.Title.Text = scanNamesListSelected[Y] + " — " + sampleScanListSelected[Y];
 
-            plot2.Title.Text = scanNamesList[X] + " — " + sampleScanList[X];
+            plot2.Title.Text = scanNamesListSelected[X] + " — " + sampleScanListSelected[X];
 
             labelR.Text = "R=" + (R_matrix.matrix[X, Y]).ToString();
 
@@ -422,7 +423,8 @@ namespace R_matrix_visualization
             for (int i = 0; i < scannames_count; i++)
                 for (int j = 0; j < scannames_count; j++)
                     R_matrix.matrix[i, j] = rr[id_of_selected[i], id_of_selected[j]];
-            
+
+            sampleScanListSelected.Clear();
             sampleNameListSelected.Clear();
             sampleCoordListSelected.Clear();
             scanNamesListSelected.Clear();
@@ -430,17 +432,30 @@ namespace R_matrix_visualization
             int intercept = 0;
             sampleNameListSelected.Add(scanNamesList[id_of_selected[0]]);
 
-            for (int i = 0; i < scannames_count; i++)
+            sampleScanList.Add(Convert.ToString(1));
+            for (int i = 1; i < scanNamesList.Count; i++)
+            {
+                if (scanNamesList[i] != scanNamesList[i - 1])
+                {
+                    intercept = i;
+                }
+                sampleScanList.Add(Convert.ToString(i + 1 - intercept));
+            }
+
+            intercept = 0;
+            sampleScanListSelected.Add(sampleScanList[id_of_selected[0]]);
+            scanNamesListSelected.Add(scanNamesList[id_of_selected[0]]);
+
+            for (int i = 1; i < scannames_count; i++)
             {
                 scanNamesListSelected.Add(scanNamesList[id_of_selected[i]]);
-                if (i > 0)
-                    if (scanNamesListSelected[i] != scanNamesListSelected[i - 1])
-                    {
-                        sampleNameListSelected.Add(scanNamesListSelected[i]);
-                        sampleCoordListSelected.Add(i);
-                        intercept = i;
-                    }
-                sampleScanList.Add(Convert.ToString(i + 1 - intercept));
+                if (scanNamesListSelected[i] != scanNamesListSelected[i - 1])
+                {
+                    sampleNameListSelected.Add(scanNamesListSelected[i]);
+                    sampleCoordListSelected.Add(i);
+                    intercept = i;
+                }
+                sampleScanListSelected.Add(sampleScanList[id_of_selected[i]]);
             }
 
             if (picture_R.Image != null)
@@ -843,8 +858,10 @@ namespace R_matrix_visualization
             {
                 int width = scans.GetLength(1);
                 double[] scan_local = new double[width];
+                double tr = threshold * scans.GetRow(scan_number).Max();
                 for (int i = 0; i < width; i++)
-                    scan_local[i] = scans[scan_number,i];
+                    if (scans[scan_number, i]>=tr)
+                        scan_local[i] = scans[scan_number,i];
                 //Buffer.BlockCopy(scans, width * scan_number, scan_local, 0, width * sizeof(double));
                 return scan_local;
             }
