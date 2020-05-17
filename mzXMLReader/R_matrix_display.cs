@@ -776,100 +776,114 @@ namespace R_matrix_visualization
 
         public void save_pane()
         {
-            string fileNameofNet = file;
-            string png_name = String.Format("{0}\\{1}_{2}.png", Path.GetDirectoryName(file),
-                Path.GetFileNameWithoutExtension(file),
-                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
-            string emf_name = String.Format("{0}\\{1}_{2}_spectra.png", Path.GetDirectoryName(file),
-                Path.GetFileNameWithoutExtension(file),
-                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
+            try
+            {
+                string fileNameofNet = file;
+                string png_name = String.Format("{0}\\{1}_{2}.png", Path.GetDirectoryName(file),
+                    Path.GetFileNameWithoutExtension(file),
+                    DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
+                string emf_name = String.Format("{0}\\{1}_{2}_spectra.png", Path.GetDirectoryName(file),
+                    Path.GetFileNameWithoutExtension(file),
+                    DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
 
-            picture_R.Image.Save(png_name, System.Drawing.Imaging.ImageFormat.Png);
-            
-            var g=zgc.CreateGraphics();
-            var bmp = zgc.GetImage();
-            bmp.Save(emf_name, System.Drawing.Imaging.ImageFormat.Png);
+                picture_R.Image.Save(png_name, System.Drawing.Imaging.ImageFormat.Png);
+
+                var g = zgc.CreateGraphics();
+                var bmp = zgc.GetImage();
+                bmp.Save(emf_name, System.Drawing.Imaging.ImageFormat.Png);
+            }
+            catch (Exception)
+            { }
         }
 
         public void save_image()
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
-            saveFileDialog1.Title = "Save an Image File";
-            saveFileDialog1.ShowDialog();
-
-            if (saveFileDialog1.FileName != "")
+            try
             {
-                // Saves the Image via a FileStream created by the OpenFile method.
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)saveFileDialog1.OpenFile();
-                // Saves the Image in the appropriate ImageFormat based upon the
-                // File type selected in the dialog box.
-                // NOTE that the FilterIndex property is one-based.
-                switch (saveFileDialog1.FilterIndex)
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
+                saveFileDialog1.Title = "Save an Image File";
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
                 {
-                    case 1:
-                        picture_R.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
+                    // Saves the Image via a FileStream created by the OpenFile method.
+                    System.IO.FileStream fs =
+                        (System.IO.FileStream)saveFileDialog1.OpenFile();
+                    // Saves the Image in the appropriate ImageFormat based upon the
+                    // File type selected in the dialog box.
+                    // NOTE that the FilterIndex property is one-based.
+                    switch (saveFileDialog1.FilterIndex)
+                    {
+                        case 1:
+                            picture_R.Image.Save(fs,
+                              System.Drawing.Imaging.ImageFormat.Jpeg);
+                            break;
 
-                    case 2:
-                        picture_R.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
+                        case 2:
+                            picture_R.Image.Save(fs,
+                              System.Drawing.Imaging.ImageFormat.Bmp);
+                            break;
 
-                    case 3:
-                        picture_R.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Gif);
-                        break;
-                    case 4:
-                        picture_R.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Png);
-                        break;
+                        case 3:
+                            picture_R.Image.Save(fs,
+                              System.Drawing.Imaging.ImageFormat.Gif);
+                            break;
+                        case 4:
+                            picture_R.Image.Save(fs,
+                              System.Drawing.Imaging.ImageFormat.Png);
+                            break;
+                    }
+
+                    fs.Close();
                 }
-
-                fs.Close();
             }
+            catch (Exception)
+            { }
         }
 
         public void save_data()
         {
-            
-            string fileNameofNet = file;
-            string data_name=String.Format("{0}\\{1}_{2}_{3}_{4}.txt", Path.GetDirectoryName(file),
-                Path.GetFileNameWithoutExtension(file),
-                X.ToString(),
-                Y.ToString(),
-                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
-
-            using (StreamWriter file_stream = new StreamWriter(data_name))
+            try
             {
-                file_stream.WriteLine("selected X and Y");
-                file_stream.WriteLine("{0}\t{1}",X.ToString(), Y.ToString());
+                string fileNameofNet = file;
+                string data_name = String.Format("{0}\\{1}_{2}_{3}_{4}.txt", Path.GetDirectoryName(file),
+                    Path.GetFileNameWithoutExtension(file),
+                    X.ToString(),
+                    Y.ToString(),
+                    DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
 
-                file_stream.WriteLine("Threshold value and outliers level");
-                file_stream.WriteLine("{0}\t{1}", threshold.ToString(), threshold_outliers.ToString());
+                using (StreamWriter file_stream = new StreamWriter(data_name))
+                {
+                    file_stream.WriteLine("selected X and Y");
+                    file_stream.WriteLine("{0}\t{1}", X.ToString(), Y.ToString());
 
-                file_stream.WriteLine("m/z array values");
-                file_stream.WriteLine(R_matrix.mz_array.ToString<double>().Replace(' ', '\t'));
+                    file_stream.WriteLine("Threshold value and outliers level");
+                    file_stream.WriteLine("{0}\t{1}", threshold.ToString(), threshold_outliers.ToString());
 
-                file_stream.WriteLine("scan X included values");
-                file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
+                    file_stream.WriteLine("m/z array values");
+                    file_stream.WriteLine(R_matrix.mz_array.ToString<double>().Replace(' ', '\t'));
 
-                file_stream.WriteLine("scan X excluded values");
-                file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
+                    file_stream.WriteLine("scan X included values");
+                    file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
 
-                file_stream.WriteLine("scan Y included values");
-                file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
+                    file_stream.WriteLine("scan X excluded values");
+                    file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
 
-                file_stream.WriteLine("scan Y excluded values");
-                file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
+                    file_stream.WriteLine("scan Y included values");
+                    file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
 
-                file_stream.WriteLine("Similarity matrix");
-                for (int i=0; i<R_matrix.matrix.Rows();i++)
-                    file_stream.WriteLine(R_matrix.matrix.GetRow(i).ToString<double>().Replace(' ', '\t'));
-                file_stream.Close();
+                    file_stream.WriteLine("scan Y excluded values");
+                    file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
+
+                    file_stream.WriteLine("Similarity matrix");
+                    for (int i = 0; i < R_matrix.matrix.Rows(); i++)
+                        file_stream.WriteLine(R_matrix.matrix.GetRow(i).ToString<double>().Replace(' ', '\t'));
+                    file_stream.Close();
+                }
             }
+            catch (Exception)
+                { }
         }
 
         private void buttonRemoveRange_Click(object sender, EventArgs e)
