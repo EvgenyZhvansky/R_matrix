@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ZedGraph;
+using System.IO;
+
 
 namespace R_matrix_visualization
 {
@@ -643,15 +645,16 @@ namespace R_matrix_visualization
             }
             else
             {
-                try { 
-                GraphPane plot1 = master.PaneList[0];
-                double st = plot1.XAxis.Scale.Min;
-                double en = plot1.XAxis.Scale.Max;
-                if (st < R_matrix.mz_array.Min())
-                    st = R_matrix.mz_array.Min();
-                if (en > R_matrix.mz_array.Max())
-                    en = R_matrix.mz_array.Max();
-                update_mz_regions(st, en, false);
+                try
+                {
+                    GraphPane plot1 = master.PaneList[0];
+                    double st = plot1.XAxis.Scale.Min;
+                    double en = plot1.XAxis.Scale.Max;
+                    if (st < R_matrix.mz_array.Min())
+                        st = R_matrix.mz_array.Min();
+                    if (en > R_matrix.mz_array.Max())
+                        en = R_matrix.mz_array.Max();
+                    update_mz_regions(st, en, false);
                     //CCBoxItem item = new CCBoxItem(st, en, false);
                     //ccb_Added.Items.Add(item);
                 }
@@ -757,15 +760,35 @@ namespace R_matrix_visualization
 
         private void contextMenuStripSave_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem==contextMenuStripSave.Items[0])
-            {
-                save_image();
-            }
+            if (e.ClickedItem == contextMenuStripSave.Items[0])
+                save_pane();
             else
-                if (e.ClickedItem==contextMenuStripSave.Items[1])
             {
-                save_data();
+                if (e.ClickedItem == contextMenuStripSave.Items[1])
+                { save_image(); }
+                else
+                {
+                    if (e.ClickedItem == contextMenuStripSave.Items[1])
+                    { save_data(); }
+                }
             }
+        }
+
+        public void save_pane()
+        {
+            string fileNameofNet = file;
+            string png_name = String.Format("{0}\\{1}_{2}.png", Path.GetDirectoryName(file),
+                Path.GetFileNameWithoutExtension(file),
+                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
+            string emf_name = String.Format("{0}\\{1}_{2}_spectra.png", Path.GetDirectoryName(file),
+                Path.GetFileNameWithoutExtension(file),
+                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
+
+            picture_R.Image.Save(png_name, System.Drawing.Imaging.ImageFormat.Png);
+            
+            var g=zgc.CreateGraphics();
+            var bmp = zgc.GetImage();
+            bmp.Save(emf_name, System.Drawing.Imaging.ImageFormat.Png);
         }
 
         public void save_image()
@@ -803,10 +826,6 @@ namespace R_matrix_visualization
                         picture_R.Image.Save(fs,
                           System.Drawing.Imaging.ImageFormat.Png);
                         break;
-                    case 5:
-                        picture_R.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Emf);
-                        break;
                 }
 
                 fs.Close();
@@ -816,6 +835,41 @@ namespace R_matrix_visualization
         public void save_data()
         {
             
+            string fileNameofNet = file;
+            string data_name=String.Format("{0}\\{1}_{2}_{3}_{4}.txt", Path.GetDirectoryName(file),
+                Path.GetFileNameWithoutExtension(file),
+                X.ToString(),
+                Y.ToString(),
+                DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss"));
+
+            using (StreamWriter file_stream = new StreamWriter(data_name))
+            {
+                file_stream.WriteLine("selected X and Y");
+                file_stream.WriteLine("{0}\t{1}",X.ToString(), Y.ToString());
+
+                file_stream.WriteLine("Threshold value and outliers level");
+                file_stream.WriteLine("{0}\t{1}", threshold.ToString(), threshold_outliers.ToString());
+
+                file_stream.WriteLine("m/z array values");
+                file_stream.WriteLine(R_matrix.mz_array.ToString<double>().Replace(' ', '\t'));
+
+                file_stream.WriteLine("scan X included values");
+                file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
+
+                file_stream.WriteLine("scan X excluded values");
+                file_stream.WriteLine(R_matrix.scan(X).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
+
+                file_stream.WriteLine("scan Y included values");
+                file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process).ToString<double>().Replace(' ', '\t'));
+
+                file_stream.WriteLine("scan Y excluded values");
+                file_stream.WriteLine(R_matrix.scan(Y).Multiply(mz_id_to_process.Multiply(-1).Add(1)).ToString<double>().Replace(' ', '\t'));
+
+                file_stream.WriteLine("Similarity matrix");
+                for (int i=0; i<R_matrix.matrix.Rows();i++)
+                    file_stream.WriteLine(R_matrix.matrix.GetRow(i).ToString<double>().Replace(' ', '\t'));
+                file_stream.Close();
+            }
         }
 
         private void buttonRemoveRange_Click(object sender, EventArgs e)

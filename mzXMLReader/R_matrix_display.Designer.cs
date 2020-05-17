@@ -117,6 +117,7 @@ namespace R_matrix_visualization
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnReset = new System.Windows.Forms.Button();
             this.labelR = new System.Windows.Forms.Label();
+            this.saveImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -385,22 +386,23 @@ namespace R_matrix_visualization
             // contextMenuStripSave
             // 
             this.contextMenuStripSave.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveImageToolStripMenuItem1,
             this.saveImageToolStripMenuItem,
             this.saveDataToolStripMenuItem});
             this.contextMenuStripSave.Name = "contextMenuStrip1";
-            this.contextMenuStripSave.Size = new System.Drawing.Size(135, 48);
+            this.contextMenuStripSave.Size = new System.Drawing.Size(181, 92);
             this.contextMenuStripSave.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripSave_ItemClicked);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.saveImageToolStripMenuItem.Text = "Save image";
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem.Text = "Save image as...";
             // 
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveDataToolStripMenuItem.Text = "Save data";
             // 
             // panel8
@@ -512,6 +514,12 @@ namespace R_matrix_visualization
             this.labelR.TabIndex = 2;
             this.labelR.Text = "R";
             // 
+            // saveImageToolStripMenuItem1
+            // 
+            this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem1.Text = "Save image";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -583,6 +591,7 @@ namespace R_matrix_visualization
         private Panel panel10;
         private Button buttonRemoveRange;
         private Panel panel6;
+        private ToolStripMenuItem saveImageToolStripMenuItem1;
     }
 }
 
