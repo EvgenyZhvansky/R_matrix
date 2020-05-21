@@ -105,6 +105,7 @@ namespace R_matrix_visualization
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnSave = new R_matrix_visualization.DropDownButton();
             this.contextMenuStripSave = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -117,7 +118,6 @@ namespace R_matrix_visualization
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnReset = new System.Windows.Forms.Button();
             this.labelR = new System.Windows.Forms.Label();
-            this.saveImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -393,6 +393,12 @@ namespace R_matrix_visualization
             this.contextMenuStripSave.Size = new System.Drawing.Size(181, 92);
             this.contextMenuStripSave.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripSave_ItemClicked);
             // 
+            // saveImageToolStripMenuItem1
+            // 
+            this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem1.Text = "Save image";
+            // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
@@ -513,12 +519,6 @@ namespace R_matrix_visualization
             this.labelR.Size = new System.Drawing.Size(15, 13);
             this.labelR.TabIndex = 2;
             this.labelR.Text = "R";
-            // 
-            // saveImageToolStripMenuItem1
-            // 
-            this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
-            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.saveImageToolStripMenuItem1.Text = "Save image";
             // 
             // Form1
             // 

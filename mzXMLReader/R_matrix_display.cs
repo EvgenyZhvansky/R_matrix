@@ -1,5 +1,4 @@
-﻿//using Accord.Imaging;
-using Accord.IO;
+﻿using Accord.IO;
 using Accord.Math;
 using Numpy;
 using System;
