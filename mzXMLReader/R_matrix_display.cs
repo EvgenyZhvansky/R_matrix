@@ -195,37 +195,17 @@ namespace R_matrix_visualization
 
         private void btn_select_R_Click(object sender, EventArgs e)
         {
-            Thread newThread = new Thread(new ThreadStart(ThreadMethod));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-            while (!open)
-            {
-                Thread.Sleep(500);
-            }
-            open = false;
-            read_r_matrix(file);
-        }
-
-        static void ThreadMethod()
-        {
-
             OpenFileDialog dlg = new OpenFileDialog();
 
             dlg.Multiselect = false;
             DialogResult result = dlg.ShowDialog();
             if (result == DialogResult.Cancel)
-                file = @"E:\ms\Neurosurgery\data\Mening655,499,728_Neur738\data.mat";
+                return;
             if (result == DialogResult.OK)
                 file = dlg.FileName;
             open = true;
-        }
-
-        public void ThreadSafeDelegate(MethodInvoker method)
-        {
-            if (InvokeRequired)
-                BeginInvoke(method);
-            else
-                method.Invoke();
+            open = false;
+            read_r_matrix(file);
         }
 
         public void read_r_matrix(string fileName)

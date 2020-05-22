@@ -1,0 +1,6 @@
+E:\C#_progs\R_matrix0.2\zgr\bin\Debug\ZedGraph.dll
+E:\C#_progs\R_matrix0.2\zgr\bin\Debug\ZedGraph.pdb
+E:\C#_progs\R_matrix0.2\zgr\obj\Debug\ZedGraph.csprojAssemblyReference.cache
+E:\C#_progs\R_matrix0.2\zgr\obj\Debug\ZedGraph.csproj.CoreCompileInputs.cache
+E:\C#_progs\R_matrix0.2\zgr\obj\Debug\ZedGraph.dll
+E:\C#_progs\R_matrix0.2\zgr\obj\Debug\ZedGraph.pdb

@@ -232,7 +232,7 @@ namespace R_matrix_visualization
             this.zgc.ScrollMinY2 = 0D;
             this.zgc.Size = new System.Drawing.Size(385, 382);
             this.zgc.TabIndex = 5;
-            this.zgc.UseExtendedPrintDialog = true;
+            //this.zgc.UseExtendedPrintDialog = true;
             this.zgc.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zgc_ContextMenuBuilder);
             this.zgc.DoubleClick += new System.EventHandler(this.zgc_DoubleClick);
             // 
