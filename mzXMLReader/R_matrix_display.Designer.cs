@@ -233,6 +233,7 @@ namespace R_matrix_visualization
             this.zgc.Size = new System.Drawing.Size(385, 382);
             this.zgc.TabIndex = 5;
             this.zgc.UseExtendedPrintDialog = true;
+            this.zgc.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zgc_ContextMenuBuilder);
             this.zgc.DoubleClick += new System.EventHandler(this.zgc_DoubleClick);
             // 
             // panel2
@@ -390,25 +391,25 @@ namespace R_matrix_visualization
             this.saveImageToolStripMenuItem,
             this.saveDataToolStripMenuItem});
             this.contextMenuStripSave.Name = "contextMenuStrip1";
-            this.contextMenuStripSave.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStripSave.Size = new System.Drawing.Size(158, 70);
             this.contextMenuStripSave.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripSave_ItemClicked);
             // 
             // saveImageToolStripMenuItem1
             // 
             this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
-            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.saveImageToolStripMenuItem1.Text = "Save image";
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveImageToolStripMenuItem.Text = "Save image as...";
             // 
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveDataToolStripMenuItem.Text = "Save data";
             // 
             // panel8

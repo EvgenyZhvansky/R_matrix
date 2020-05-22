@@ -915,6 +915,18 @@ namespace R_matrix_visualization
             { }
         }
 
+        private void zgc_ContextMenuBuilder(ZedGraphControl sender, ContextMenuStrip menuStrip, Point mousePt, ZedGraphControl.ContextMenuObjectState objState)
+        {
+            foreach (ToolStripMenuItem item in menuStrip.Items)
+            {
+                if ((string)item.Tag == "set_default")
+                {
+                    menuStrip.Items.Remove(item);
+                    break;
+                }
+            }
+        }
+
         public class R_matrix : Form1
         {
             public static double[,] matrix { get; set; }
