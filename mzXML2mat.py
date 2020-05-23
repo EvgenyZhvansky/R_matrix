@@ -14,9 +14,9 @@ def get_scan_count(tree_local):
             scan_count = int(elem.attrib['scanCount'])
             return scan_count
 			
-def binning(mz, spectr, mzs_net):
+def binning(mz, spectr, mzs_net,mz_len):
     index = np.digitize(mz, mzs_net)
-    return np.bincount(index, weights=spectr)[1:-1]
+    return np.bincount(index, weights=spectr,minlength=mz_len+2)[1:-1]
 	
 def median_filtering(filenames, scans_count, n_median, mzs_net,mz_len):
     scans_count=scans_count//n_median
@@ -29,7 +29,7 @@ def median_filtering(filenames, scans_count, n_median, mzs_net,mz_len):
             for tree in reader:
                 mz = tree['m/z array']
                 spectr = tree['intensity array']
-                spectra_binned[k,:]=binning(mz,spectr,mzs_net)
+                spectra_binned[k,:]=binning(mz,spectr,mzs_net,mz_len)
                 k+=1
     else:
         spectra_to_median=np.zeros((n_median,mz_len))
@@ -41,7 +41,7 @@ def median_filtering(filenames, scans_count, n_median, mzs_net,mz_len):
                     tree=next(reader)
                     mz = tree['m/z array']
                     spectr = tree['intensity array']
-                    spectra_to_median[t,:]=binning(mz,spectr,mzs_net)
+                    spectra_to_median[t,:]=binning(mz,spectr,mzs_net,mz_len)
                 spectra_binned[k,:]=np.median(spectra_to_median,axis=0)
                 k+=1
     return spectra_binned
