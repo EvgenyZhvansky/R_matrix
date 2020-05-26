@@ -747,7 +747,7 @@ namespace R_matrix_visualization
                 { save_image(); }
                 else
                 {
-                    if (e.ClickedItem == contextMenuStripSave.Items[1])
+                    if (e.ClickedItem == contextMenuStripSave.Items[2])
                     { save_data(); }
                 }
             }
@@ -836,6 +836,12 @@ namespace R_matrix_visualization
                 {
                     file_stream.WriteLine("selected X and Y");
                     file_stream.WriteLine("{0}\t{1}", X.ToString(), Y.ToString());
+
+                    file_stream.WriteLine("X selected file");
+                    file_stream.WriteLine(scanNamesListSelected[X] + " — " + sampleScanListSelected[X]);
+
+                    file_stream.WriteLine("Y selected file");
+                    file_stream.WriteLine(scanNamesListSelected[Y] + " — " + sampleScanListSelected[Y]);
 
                     file_stream.WriteLine("Threshold value and outliers level");
                     file_stream.WriteLine("{0}\t{1}", threshold.ToString(), threshold_outliers.ToString());

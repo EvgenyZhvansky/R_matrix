@@ -232,7 +232,6 @@ namespace R_matrix_visualization
             this.zgc.ScrollMinY2 = 0D;
             this.zgc.Size = new System.Drawing.Size(385, 382);
             this.zgc.TabIndex = 5;
-            //this.zgc.UseExtendedPrintDialog = true;
             this.zgc.ContextMenuBuilder += new ZedGraph.ZedGraphControl.ContextMenuBuilderEventHandler(this.zgc_ContextMenuBuilder);
             this.zgc.DoubleClick += new System.EventHandler(this.zgc_DoubleClick);
             // 
@@ -528,7 +527,7 @@ namespace R_matrix_visualization
             this.ClientSize = new System.Drawing.Size(933, 480);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
-            this.Text = "R-matrix display";
+            this.Text = "SSM display";
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
