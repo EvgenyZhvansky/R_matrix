@@ -397,7 +397,7 @@ namespace R_matrix_visualization
             // 
             this.saveImageToolStripMenuItem1.Name = "saveImageToolStripMenuItem1";
             this.saveImageToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
-            this.saveImageToolStripMenuItem1.Text = "Save image";
+            this.saveImageToolStripMenuItem1.Text = "Save images";
             // 
             // saveImageToolStripMenuItem
             // 

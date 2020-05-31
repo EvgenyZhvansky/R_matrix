@@ -152,12 +152,12 @@ if __name__ == '__main__':
             print('Default will be used. Enter only digits. For decimals use " . " ')
 
         try:
-            mzbin=float(input("\nEnter the m/z bin width (default is 0.1): "))
+            mzbin=float(input("\nEnter the m/z bin width > 0 (default is 0.1): "))
         except ValueError:
             print('Default will be used. Enter only digits. For decimals use " . " ')
 
         try:
-            n_median=int(input("\nEnter the median width value (enter 1 for no median filtration, skip (press Enter) for automated width chosing): "))
+            n_median=int(input("\nEnter the median width value > 0 (enter 1 for no median filtration, skip (press Enter) for automated width chosing): "))
         except ValueError:
             print("Default median parameter will be calculated automatically. Enter only digits")
 
