@@ -128,6 +128,7 @@ def create_data_var(filenames, mz_array,spectra,scans_count):
     return out_filename_mat, data
 
 if __name__ == '__main__':
+    print('wait for open file diolog ...')
     root = Tk()
     root.withdraw()
     filenames = askopenfilenames(parent=root, filetypes=[("mzXML files", ".mzXML")])
@@ -138,15 +139,15 @@ if __name__ == '__main__':
         n_median=None
         GB_max=2
 
-        print("Skip any step to use the default value")
+        print("Skip (press Enter) any step to use the default value")
 
         try:
-            mzmin=float(input("Enter the m/z min (default is 200): "))
+            mzmin=float(input("Enter the m/z min > 0 (default is 200): "))
         except ValueError:
             print('Default will be used. Enter only digits. For decimals use " . " ')
 
         try:
-            mzmax=float(input("\nEnter the m/z max (default is 1000): "))
+            mzmax=float(input("\nEnter the m/z max > m/z min (default is 1000): "))
         except ValueError:
             print('Default will be used. Enter only digits. For decimals use " . " ')
 
@@ -156,12 +157,12 @@ if __name__ == '__main__':
             print('Default will be used. Enter only digits. For decimals use " . " ')
 
         try:
-            n_median=int(input("\nEnter the median width value (enter 1 for no median filtration, skip for automated width chosing): "))
+            n_median=int(input("\nEnter the median width value (enter 1 for no median filtration, skip (press Enter) for automated width chosing): "))
         except ValueError:
             print("Default median parameter will be calculated automatically. Enter only digits")
 
         try:
-            GB_max=int(input("\nEnter the RAM space max (in GB): "))
+            GB_max=int(input("\nEnter the RAM space max > 1 (in GB, default is 2GB): "))
             if GB_max<1:
                 GB_max=2
                 print('Too small value. Default will be used (2).')
