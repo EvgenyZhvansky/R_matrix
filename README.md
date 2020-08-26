@@ -1,8 +1,10 @@
 # SSM_display
 
-Spectra similarity matrix display for mass spectrometric data.
+Spectra similarity matrix display (SSM display) for mass spectrometric data ([Wiki](https://github.com/EvgenyZhvansky/R_matrix/wiki)).
 
-Detailed manual is available in User_manual.pdf. 
+Detailed manual is available in [Wiki page](https://github.com/EvgenyZhvansky/R_matrix/wiki/Manual) or in User_manual.pdf.
+
+The screencast of the SSM display workflow is available [here](https://youtu.be/s9I5s4NQAf0).
 
 System requirements: 
 
