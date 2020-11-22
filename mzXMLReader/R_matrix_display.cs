@@ -947,7 +947,7 @@ namespace R_matrix_visualization
                 for (int i = 0; i < mz_array_length; i++)
                 {
                     mz_id_to_process[i] = 1;
-                    mz_array[i] = (double)(i + 1) / n_precision + mzmin;
+                    mz_array[i] = (double)(i) / n_precision + mzmin;
                 }
             }
         }
