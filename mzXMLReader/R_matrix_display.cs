@@ -404,7 +404,7 @@ namespace R_matrix_visualization
             for (int i = 0; i < scannames_count; i++)
                 for (int j = 0; j < scannames_count; j++)
                     R_matrix.matrix[i, j] = rr[id_of_selected[i], id_of_selected[j]];
-
+            sampleScanList.Clear();
             sampleScanListSelected.Clear();
             sampleNameListSelected.Clear();
             sampleCoordListSelected.Clear();

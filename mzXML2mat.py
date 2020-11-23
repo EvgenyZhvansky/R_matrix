@@ -19,7 +19,7 @@ def binning(mz, spectr, mzs_net,mz_len):
     return np.bincount(index, weights=spectr,minlength=mz_len+2)[1:-1]
 	
 def median_filtering(filenames, scans_count, n_median, mzs_net,mz_len):
-    scans_count=scans_count//n_median
+    #scans_count=scans_count//n_median
     spectra_binned=np.zeros((scans_count.sum(),mz_len))
     k=0
     if n_median==1:
@@ -69,6 +69,8 @@ def calc_scans_count(filenames, mzmin, mzmax, mz_bin, n_median,scans_count,mem_i
         for i in range(over_scans):
             scans_count[np.argmax(scans_count)]-=1
         scans_count*=n_median
+    else:
+        scans_count = scans_count // n_median
     return scans_count,n_median
 	
 def read_and_convert_data(filenames, mzmin=200, mzmax=1000, mz_bin=0.1, n_median=None, GB_max=2):
