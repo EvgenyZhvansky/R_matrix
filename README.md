@@ -11,3 +11,5 @@ System requirements:
 * MS Windows 7, 8, 8.1, 10 with Microsoft .NET Framework 4.7 installed, 
 * 1GB RAM, 
 * 1GB of free space in system partition.
+
+*Please, cite the [paper](https://doi.org/10.1093/bioinformatics/btaa1072) if you use this software.*
